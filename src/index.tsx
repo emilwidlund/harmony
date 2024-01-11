@@ -167,7 +167,7 @@ export const ColorWheel = ({ harmony: harmonyName, onChange, ...props }: ColorWh
                     width: '100%',
                     height: '100%',
                     border: "2px solid #fff",
-                    borderRadius: "99px",
+                    borderRadius: "9999px",
                 }} 
             />
             {handles.map((position, i) => (
@@ -179,7 +179,7 @@ export const ColorWheel = ({ harmony: harmonyName, onChange, ...props }: ColorWh
                         left: "-12px",
                         width: "24px",
                         height: "24px",
-                        borderRadius: "9999px",
+                        borderRadius: "999px",
                         border: "2px solid #fff",
                         transform: `translate(${position.x}px, ${position.y}px)`
                     }}
