@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 
 export const harmonies = {
@@ -9,12 +9,12 @@ export const harmonies = {
     square: [90, 180, 270]
 } as const;
 
-export type ColorWheelProps = {
+export type ColorWheelProps = ComponentProps<'div'> & {
     harmony: keyof typeof harmonies;
     onChange?: (colors: { hue: number; saturation: number; value: number }[]) => void;
 }
 
-export const ColorWheel = ({ harmony: harmonyName, onChange }: ColorWheelProps) => {
+export const ColorWheel = ({ harmony: harmonyName, onChange, ...props }: ColorWheelProps) => {
     const ref = useRef<HTMLCanvasElement>(null);
     const [position, setPosition] = useState({ x: 144, y: 144 });
 
@@ -159,6 +159,7 @@ export const ColorWheel = ({ harmony: harmonyName, onChange }: ColorWheelProps) 
                 width: '300px',
                 height: '300px',
             }}
+            {...props}
         >
             <canvas 
                 ref={ref} 

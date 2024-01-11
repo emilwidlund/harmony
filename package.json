@@ -8,7 +8,7 @@
     "build/*"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --outDir build",
     "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.2.47",
+    "react": "^18.2.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },
@@ -25,5 +26,8 @@
   "type": "module",
   "dependencies": {
     "react-draggable": "^4.4.6"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
   }
 }
