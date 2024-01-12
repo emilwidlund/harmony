@@ -61,6 +61,7 @@ export default function App() {
 
   /* @ts-ignore */
   const handleColorChange = useCallback(
+    /* @ts-ignore */
     (colors) => {
       if (!gradient.material) {
         return setTimeout(() => handleColorChange(colors), 200);
