@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@newfrgmnt/harmony':
-    specifier: ^1.0.1
-    version: 1.0.1(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.0.2
+    version: 1.0.2(react-dom@18.2.0)(react@18.2.0)
   framer-motion:
     specifier: ^10.18.0
     version: 10.18.0(react-dom@18.2.0)(react@18.2.0)
@@ -182,8 +182,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@newfrgmnt/harmony@1.0.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-rZWln6+kJJ9t9/RoPVwpCgcjJdfDtC6VuPPx6ktvAarPiNipvzTlWf6vH75aIpakrPn43c0ezUXBvg43H+h3ww==}
+  /@newfrgmnt/harmony@1.0.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HmFCxgF5DJ3fk/6MNF+GZzXIgLRlbWxGwMwVm6F+DgUtZuoBGOeOWt/aMG6ewxVSIHgfc+LhsJ6kND9BPUtLnQ==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
