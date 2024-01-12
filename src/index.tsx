@@ -74,7 +74,7 @@ export const ColorWheel = ({ harmony: harmonyName, onChange, ...props }: ColorWh
 
         const colors = harmony.map(combinationHue => {
             let newHue = (hue + combinationHue) % 360;
-            newHue = hue < 0 ? 360 + hue : hue;
+            newHue = newHue < 0 ? 360 + newHue : newHue;
 
             const [x, y] = polar2xy(r, newHue * (Math.PI / 180));
             return { x: -x + ctx.canvas.width / 2, y: -y + ctx.canvas.height / 2, hue: newHue, saturation, value };
