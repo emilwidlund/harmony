@@ -37,6 +37,10 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
 
     const handleDrag: DraggableEventHandler = useCallback((e, data) => {
         if (!ref.current) return;
+    
+        e.stopPropagation()
+        e.preventDefault()
+
         let [r, phi] = xy2polar(data.x - radius, data.y - radius);
         // Limit radial distance to radius
         r = Math.min(r, radius);
