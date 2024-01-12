@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable */
-import { ColorWheel, harmonies } from "../../../src/index";
+import { ColorWheel, harmonies } from "@newfrgmnt/harmony";
 /* @ts-ignore */
 import { Gradient } from "../components/GradientMesh/GradientMesh";
 import { useEffect, useMemo, useCallback, useState } from "react";
