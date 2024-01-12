@@ -2,7 +2,7 @@
 
 # Harmony
 
-A new kind of Color Picker
+A new kind of Color Picker, which computes harmonic colors along with the primary one. It supports Analogous, Triad, Tetradic, Complementary & Square harmonies.
 
 ### Installation
 
