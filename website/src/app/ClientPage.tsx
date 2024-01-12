@@ -53,6 +53,7 @@ export default function App() {
     root.style.setProperty("--gradient-color-3", "#ddd");
     root.style.setProperty("--gradient-color-4", "#fff");
 
+    /* @ts-ignore */
     gradient.initGradient("#gradient-canvas");
   }, [gradient]);
 
