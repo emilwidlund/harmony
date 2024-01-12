@@ -84,7 +84,6 @@ export default function App() {
 
   return (
     <div
-      className="App"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -107,7 +106,7 @@ export default function App() {
       />
 
       <motion.div
-        className="relative mx-auto flex max-w-screen-2xl flex-grow flex-col items-center justify-center gap-y-24"
+        className="relative flex mx-auto w-full max-w-screen-2xl flex-grow flex-col items-center justify-center gap-y-24 p-12"
         variants={{
           initial: { opacity: 1 },
           animate: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -117,11 +116,11 @@ export default function App() {
       >
        <div className="flex flex-col gap-y-16 lg:gap-y-24 items-center">
         <TextReveal>
-            <h3 className="text-center text-3xl !leading-normal tracking-tight lg:text-[calc(100vw_/_50)] md:text-4xl">
+            <h3 className="text-center text-xl !leading-normal tracking-tight lg:text-[calc(100vw_/_50)] md:text-3xl">
               Harmony
             </h3>
           </TextReveal>
-          <h1 className="text-center text-6xl !leading-normal tracking-tight lg:text-[calc(100vw_/_20)] md:text-7xl">
+          <h1 className="text-center text-4xl !leading-normal tracking-tight lg:text-[calc(100vw_/_20)] md:text-6xl">
             <TextReveal>
               A new kind of
               <br className="hidden lg:block" />
@@ -129,7 +128,7 @@ export default function App() {
             <TextReveal>Color Picker</TextReveal>
           </h1>
           <TextReveal>
-            <p className="text-lg font-light md:text-3xl">
+            <p className="text-lg font-light md:text-3xl text-center">
               Unlock the power of color harmonies
             </p>
           </TextReveal>
