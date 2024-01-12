@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable */
-import { ColorWheel } from "@newfrgmnt/harmony";
+import { ColorWheel, harmonies } from "../../../src/index";
 /* @ts-ignore */
 import { Gradient } from "../components/GradientMesh/GradientMesh";
 import { useEffect, useMemo, useCallback, useState } from "react";
@@ -43,6 +43,8 @@ function HSVtoRGB(h: number, s: number, v: number) {
 }
 
 export default function App() {
+  const [selectedHarmony, setSelectedHarmony] =
+    useState<keyof typeof harmonies>("analogous");
   const gradient = useMemo(() => new Gradient(), []);
 
   useEffect(() => {
@@ -58,29 +60,36 @@ export default function App() {
   }, [gradient]);
 
   /* @ts-ignore */
-  const handleColorChange = useCallback((colors) => {
-    if (!gradient.material) {
-      return setTimeout(() => handleColorChange(colors), 200)
-    }
+  const handleColorChange = useCallback(
+    (colors) => {
+      if (!gradient.material) {
+        return setTimeout(() => handleColorChange(colors), 200);
+      }
 
-    /* @ts-ignore */
-    const newColors = colors
       /* @ts-ignore */
-      .map((color, i) => {
-        const { r, g, b } = HSVtoRGB(color.hue, color.saturation, color.value);
-        return [r, g, b];
-      });
+      const newColors = colors
+        /* @ts-ignore */
+        .map((color, i) => {
+          const { r, g, b } = HSVtoRGB(
+            color.hue,
+            color.saturation,
+            color.value
+          );
+          return [r, g, b];
+        });
 
-    const [base, ...waves] = newColors;
+      const [base, ...waves] = newColors;
 
-    gradient.material.uniforms["u_baseColor"].value = base;
+      gradient.material.uniforms["u_baseColor"].value = base;
 
-    for (const [index, wave] of Object.entries(waves)) {
-      gradient.material.uniforms["u_waveLayers"].value[
-        index
-      ].value.color.value = wave;
-    }
-  }, [gradient]);
+      for (const [index, wave] of Object.entries(waves)) {
+        gradient.material.uniforms["u_waveLayers"].value[
+          index
+        ].value.color.value = wave;
+      }
+    },
+    [gradient]
+  );
 
   return (
     <div
@@ -88,7 +97,7 @@ export default function App() {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -106,7 +115,7 @@ export default function App() {
       />
 
       <motion.div
-        className="relative flex mx-auto w-full max-w-screen-2xl flex-grow flex-col items-center justify-center gap-y-24 p-12"
+        className="relative flex mx-auto w-full max-w-screen-2xl flex-grow flex-col justify-between items-center gap-y-32 p-16"
         variants={{
           initial: { opacity: 1 },
           animate: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -114,13 +123,14 @@ export default function App() {
         initial="initial"
         animate="animate"
       >
-       <div className="flex flex-col gap-y-16 lg:gap-y-24 items-center">
+        {" "}
         <TextReveal>
-            <h3 className="text-center text-xl !leading-normal tracking-tight lg:text-[calc(100vw_/_50)] md:text-3xl">
-              Harmony
-            </h3>
-          </TextReveal>
-          <h1 className="text-center text-4xl !leading-normal tracking-tight lg:text-[calc(100vw_/_20)] md:text-6xl">
+          <h3 className="text-center text-xl !leading-normal tracking-tight md:text-3xl">
+            Harmony
+          </h3>
+        </TextReveal>
+        <div className="flex flex-col gap-y-16 lg:gap-y-16 items-center">
+          <h1 className="text-center text-5xl !leading-normal tracking-tight lg:text-[calc(100vw_/_20)] md:text-6xl">
             <TextReveal>
               A new kind of
               <br className="hidden lg:block" />
@@ -128,13 +138,20 @@ export default function App() {
             <TextReveal>Color Picker</TextReveal>
           </h1>
           <TextReveal>
-            <p className="text-lg font-light md:text-3xl text-center">
+            <p className="text-lg font-light md:text-2xl text-center">
               Unlock the power of color harmonies
             </p>
           </TextReveal>
-       </div>
+          <TextReveal transition={{ delay: 0.6 }}>
+            <div className="flex flex-row items-center gap-x-2">
+              <span className="bg-white bg-opacity-20 rounded-xl px-4 py-2 font-mono">
+                npm install @newfrgmnt/harmony
+              </span>
+            </div>
+          </TextReveal>
+        </div>
         <motion.div
-          className="shadow-3xl z-50 rounded-full"
+          className="shadow-3xl z-50 rounded-full flex flex-col items-center gap-y-8"
           variants={{
             initial: { opacity: 0 },
             animate: {
@@ -148,11 +165,27 @@ export default function App() {
           }}
         >
           <ColorWheel
-            radius={150}
-            harmony="analogous"
+            radius={120}
+            harmony={selectedHarmony}
             defaultColor={{ hue: 0, saturation: 0.8, value: 1 }}
             onChange={handleColorChange}
           />
+          <select
+            className="bg-white bg-opacity-15 px-4 py-2 rounded-xl border-none outline-none capitalize appearance-none text-center"
+            onChange={(e) =>
+              setSelectedHarmony(e.target.value as keyof typeof harmonies)
+            }
+          >
+            {Object.keys(harmonies).map((harmony) => (
+              <option
+                className="capitalize"
+                key={harmony}
+                selected={harmony === selectedHarmony}
+              >
+                {harmony}
+              </option>
+            ))}
+          </select>
         </motion.div>
       </motion.div>
     </div>
@@ -167,15 +200,21 @@ const variants: Variants = {
     y: "0%",
     transition: {
       duration: 1.5,
-      ease: [0.87, 0, 0.13, 1],
+      ease: [0.75, 0, 0.25, 1],
     },
   },
 };
 
-const TextReveal = ({ children, ...props }: HTMLMotionProps<"div">) => {
+const TextReveal = ({
+  children,
+  className,
+  ...props
+}: HTMLMotionProps<"div">) => {
   return (
-    <motion.div {...props} className="relative h-fit overflow-hidden">
-      <motion.div variants={variants}>{children}</motion.div>
+    <motion.div {...props} className={`relative h-fit overflow-hidden`}>
+      <motion.div className={className} variants={variants}>
+        {children}
+      </motion.div>
     </motion.div>
   );
 };

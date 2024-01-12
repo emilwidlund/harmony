@@ -140,7 +140,7 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
                             border: "2px solid #fff",
                             backgroundColor: `rgb(${r}, ${g}, ${b})`,
                             transform: `translate(${harmony.x}px, ${harmony.y}px)`,
-                            boxShadow: "0 0 0 2px rgba(0, 0, 0, 0.1)",
+                            boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.05)",
                         }}
                     />
                 )
@@ -160,7 +160,7 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
                         borderRadius: "99px",
                         border: "2px solid rgba(255, 255, 255, 1)",
                         backgroundColor: `rgb(${r}, ${g}, ${b})`,
-                        boxShadow: "0 0 0 2px rgba(0, 0, 0, 0.1)",
+                        boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.05)",
                     }} 
                 >
                     <div 
