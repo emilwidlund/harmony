@@ -4,6 +4,8 @@
 
 A new kind of Color Picker, which computes harmonic colors along with the primary one. It supports Analogous, Triad, Tetradic, Complementary & Square harmonies.
 
+[Read more about the implementation here.](https://polar.sh/emilwidlund/posts/a-new-kind-of-color-picker-with-react-typescript)
+
 ### Installation
 
 Harmony is available on the npm registry. It requires React as a peer dependency.
