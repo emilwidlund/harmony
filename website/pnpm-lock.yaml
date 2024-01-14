@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@newfrgmnt/harmony':
-    specifier: ^1.0.2
-    version: 1.0.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.0.3
+    version: 1.0.3(react-dom@18.2.0)(react@18.2.0)
   '@vercel/analytics':
     specifier: ^1.1.1
     version: 1.1.1
@@ -185,8 +185,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@newfrgmnt/harmony@1.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-HmFCxgF5DJ3fk/6MNF+GZzXIgLRlbWxGwMwVm6F+DgUtZuoBGOeOWt/aMG6ewxVSIHgfc+LhsJ6kND9BPUtLnQ==}
+  /@newfrgmnt/harmony@1.0.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6rzPqFp0jhIIuv9K98OriGRYTjUXhID4s0IYDwrZkiAQ4MNyda/cTqWHQrdS4/ZOkhB83ai1AjhOnD7TcH+mEA==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
