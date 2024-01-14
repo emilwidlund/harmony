@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@newfrgmnt/harmony": "^1.0.2",
+    "@newfrgmnt/harmony": "^1.0.3",
     "@vercel/analytics": "^1.1.1",
     "framer-motion": "^10.18.0",
     "next": "14.0.4",
