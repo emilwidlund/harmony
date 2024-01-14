@@ -1,8 +1,8 @@
 {
   "name": "@newfrgmnt/harmony",
   "version": "1.0.2",
-  "main": "./build/index.js",
-  "module": "./build/index.mjs",
+  "main": "./build/index.cjs",
+  "module": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
     "build/*"
