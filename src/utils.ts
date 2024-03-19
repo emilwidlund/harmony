@@ -58,7 +58,7 @@ export const hsv2rgb = (hue: number, saturation: number, value: number): [number
     return [255 * r, 255 * g, 255 * b];
 }
 
-export const xy2rgb = (x: number, y: number, radius: number) => {
+export const xy2rgb = (x: number, y: number, radius: number, value: number = 1.0) => {
     x -= radius;
     y -= radius;
     
@@ -66,7 +66,6 @@ export const xy2rgb = (x: number, y: number, radius: number) => {
 
     const hue = rad2deg(phi);
     const saturation = r / radius;
-    const value = 1.0;
 
     return hsv2rgb(hue, saturation, value);
 }
