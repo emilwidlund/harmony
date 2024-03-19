@@ -18,6 +18,40 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
     const [position, setPosition] = useState(defaultColor ? hsv2xy(defaultColor.hue, defaultColor.saturation, defaultColor.value, radius) : hsv2xy(0, 1, value, radius));
     const harmony = useMemo(() => harmonies[harmonyName], [harmonies, harmonyName]);
 
+    const drawCircle = useCallback((ctx: CanvasRenderingContext2D) => {
+        let image = ctx.createImageData(2 * radius, 2 * radius);
+        let data = image.data;
+
+        for (let x = -radius; x < radius; x++) {
+            for (let y = -radius; y < radius; y++) {
+                let [r, phi] = xy2polar(x, y);
+
+                let deg = rad2deg(phi);
+
+                // Figure out the starting index of this pixel in the image data array.
+                let rowLength = 2 * radius;
+                let adjustedX = x + radius; // convert x from [-50, 50] to [0, 100] (the coordinates of the image data array)
+                let adjustedY = y + radius; // convert y from [-50, 50] to [0, 100] (the coordinates of the image data array)
+                let pixelWidth = 4; // each pixel requires 4 slots in the data array
+                let index = (adjustedX + adjustedY * rowLength) * pixelWidth;
+
+                let hue = deg;
+                let saturation = r / radius;
+
+                let [red, green, blue] = hsv2rgb(hue, saturation, value);
+                let alpha = 255;
+
+                data[index] = red;
+                data[index + 1] = green;
+                data[index + 2] = blue;
+                data[index + 3] = alpha;
+            }
+        }
+
+        ctx.putImageData(image, 0, 0);
+    }, [radius, value]);
+
+
     useEffect(() => {
         if (!ref.current) return;
         const ctx = ref.current.getContext('2d');
@@ -28,7 +62,7 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
         ctx.canvas.height = radius * 2
 
         drawCircle(ctx);
-    }, []);
+    }, [drawCircle]);
 
     useEffect(() => {
         if (color) {
@@ -70,40 +104,6 @@ export const ColorWheel = ({ radius, harmony: harmonyName, color, defaultColor, 
 
         return colors;
     }, [position, harmony, polar2xy, onChange, xy2polar, rad2deg, radius, value]);
-
-
-    const drawCircle = useCallback((ctx: CanvasRenderingContext2D) => {
-        let image = ctx.createImageData(2 * radius, 2 * radius);
-        let data = image.data;
-
-        for (let x = -radius; x < radius; x++) {
-            for (let y = -radius; y < radius; y++) {
-                let [r, phi] = xy2polar(x, y);
-
-                let deg = rad2deg(phi);
-
-                // Figure out the starting index of this pixel in the image data array.
-                let rowLength = 2 * radius;
-                let adjustedX = x + radius; // convert x from [-50, 50] to [0, 100] (the coordinates of the image data array)
-                let adjustedY = y + radius; // convert y from [-50, 50] to [0, 100] (the coordinates of the image data array)
-                let pixelWidth = 4; // each pixel requires 4 slots in the data array
-                let index = (adjustedX + adjustedY * rowLength) * pixelWidth;
-
-                let hue = deg;
-                let saturation = r / radius;
-
-                let [red, green, blue] = hsv2rgb(hue, saturation, value);
-                let alpha = 255;
-
-                data[index] = red;
-                data[index + 1] = green;
-                data[index + 2] = blue;
-                data[index + 3] = alpha;
-            }
-        }
-
-        ctx.putImageData(image, 0, 0);
-    }, [radius, value]);
 
     const [r, g, b] = useMemo(() => xy2rgb(position.x, position.y, radius, value), [position, radius, value]);
 
